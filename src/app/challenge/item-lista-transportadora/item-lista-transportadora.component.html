@@ -1,0 +1,29 @@
+<div>
+
+    <mat-card class="estilo-card">
+    
+        <mat-card-content fxLayout="row">
+    
+            <div fxFlex="8" fxLayout="column" fxFlexAlign="center center">
+                imagem aqui 
+            </div>
+    
+            <div fxFlex fxLayout="column">
+                <p>{{transportadora?.nome }} - {{ transportadora?.modal }}</p>
+                <p>25.733.638/0001-62</p>
+            </div>
+    
+            <div fxFlex fxLayout="column">
+                <p>{{ formatarFones(transportadora?.telefone) }} <span *ngIf="transportadora?.celular">- {{ formatarFones(transportadora?.celular) }}</span></p>
+                <p>{{ transportadora?.email }}</p>
+            </div>
+            
+            <div fxFlex fxLayout="column">
+                <p *ngIf="transportadora?.whatsApp">Fale agora: {{ formatarFones(transportadora?.whatsApp) }}</p>
+            </div>
+    
+        </mat-card-content>
+    
+    </mat-card>
+
+</div>

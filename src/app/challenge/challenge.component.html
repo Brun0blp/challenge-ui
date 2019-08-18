@@ -1,15 +1,29 @@
-<section class="page" fxLayout="column">
+<section fxLayout="column">
 
     <mat-toolbar color="primary">
         <mat-toolbar-row>
+
             <p>Transportadoras |</p>
+            
             <div fxFlex></div>
-            <button mat-raised-button>
+
+            <button mat-raised-button [routerLink]="['c']">
                 <span>Cadastrar sua transportadora</span>
             </button>
+
         </mat-toolbar-row>
     </mat-toolbar>
 
-    
+    <section fxFlex fxLayout="column">
+        <div fxFLex="10">
+            <p>Filtro aqui</p>
+        </div>
+
+        <div fxFlex>
+            <ng-container *ngFor="let transportadora of listaDeTransportadoras">
+                <app-item-lista-transportadora [transportadora]="transportadora"></app-item-lista-transportadora>
+            </ng-container>
+        </div>
+    </section>
 
 </section>

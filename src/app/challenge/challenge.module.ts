@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -21,12 +22,14 @@ import { CadastroTransportadoraComponent } from './cadastro-transportadora/cadas
 import { EditarTransportadoraComponent } from './editar-transportadora/editar-transportadora.component';
 import { DialogExclusaoModule } from './shared/dialog-exclusao/dialog-exclusao.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { EstadoPipe } from './shared/estado.pipe';
 
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+    NgxViacepModule,
     RouterModule,
     ChallengeRoutingModule,
     DialogExclusaoModule,
@@ -42,7 +45,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule,
     MatSnackBarModule,
   ],
-  declarations: [ChallengeComponent, ItemListaTransportadoraComponent, CadastroTransportadoraComponent, EditarTransportadoraComponent],
+  declarations: [
+    ChallengeComponent,
+    ItemListaTransportadoraComponent,
+    CadastroTransportadoraComponent,
+    EditarTransportadoraComponent,
+    EstadoPipe,
+  ],
   providers: [
     TransportadoraService,
     TransportadoraRepository,

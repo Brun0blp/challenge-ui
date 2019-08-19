@@ -4,6 +4,7 @@ import { Transportadora } from './shared/model/transportadora';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { listaUfs } from './shared/model/tipo-uf.enum';
 
 @Component({
   selector: 'app-challenge',
@@ -15,6 +16,8 @@ export class ChallengeComponent implements OnInit {
   listaDeTransportadoras: Transportadora[];
 
   filtros: FormGroup;
+
+  listaDeUfs = listaUfs;
 
   constructor(
     private _fb: FormBuilder,
@@ -31,7 +34,6 @@ export class ChallengeComponent implements OnInit {
     }
 
   ngOnInit() {
-
     this._service.listar(this.filtros.value)
       .subscribe({
         next: lista => this.listaDeTransportadoras = lista,

@@ -4,8 +4,10 @@ import { TransportadoraService } from '../shared/transportadora.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Transportadora } from '../shared/model/transportadora';
 import { Endereco } from '../shared/model/endereco';
-import { switchMap, filter } from 'rxjs/operators';
+import { switchMap, filter, debounceTime } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgxViacepService, Endereco as EnderecoResp } from '@brunoc/ngx-viacep';
+import { listaUfs } from '../shared/model/tipo-uf.enum';
 
 
 @Component({
@@ -19,10 +21,13 @@ export class EditarTransportadoraComponent implements OnInit {
 
   transportadora: Transportadora;
 
+  listaDeUfs = listaUfs;
+
   constructor(
     private _fb: FormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
+    private _validaCepService: NgxViacepService,
     private _service: TransportadoraService,
     private _snackBar: MatSnackBar,
   ) {
@@ -38,7 +43,7 @@ export class EditarTransportadoraComponent implements OnInit {
       whatsAppCodigo: [null, Validators.pattern('^[0-9]*$')],
       whatsAppNumero: [null, Validators.pattern('^[0-9]*$')],
       modal: [null, Validators.required],
-      cep: [null, Validators.pattern('^[0-9]*$')],
+      cep: [null, [Validators.pattern('^[0-9]*$'), Validators.minLength(8)]],
       estado: [null, Validators.required],
       cidade: [null, Validators.required],
       bairro: [null, Validators.required],
@@ -61,6 +66,28 @@ export class EditarTransportadoraComponent implements OnInit {
         error: err => this._snackBar.open('Erro ao obter detalhes da transportadora', '', { duration: 4000 })
       });
 
+    this.formDeEdicao.get('cep').valueChanges
+      .pipe(debounceTime(1000))
+      .pipe(filter(cep => !!cep))
+      .subscribe(cep => {
+        this._validaCepService.buscarPorCep(cep)
+          .then((endereco: EnderecoResp) => {
+            if (endereco.uf) {
+              this._setEndereco(endereco);
+            }
+          })
+          .catch(err => {});
+      });
+
+  }
+
+  private _setEndereco(endereco: any) {
+    this.formDeEdicao.patchValue({
+      bairro: endereco.bairro ? endereco.bairro : null,
+      cidade: endereco.localidade ? endereco.localidade : null,
+      rua: endereco.logradouro ? endereco.logradouro : null,
+      estado: endereco.uf ? endereco.uf : null,
+    }, { emitEvent: false });
   }
 
   private _inicializarFormulario() {
@@ -87,7 +114,7 @@ export class EditarTransportadoraComponent implements OnInit {
       bairro: this.transportadora.endereco.bairro && this.transportadora.endereco.bairro,
       rua: this.transportadora.endereco.rua && this.transportadora.endereco.rua,
       numero: this.transportadora.endereco.numero && this.transportadora.endereco.numero,
-    });
+    }, { emitEvent: true });
 
   }
 

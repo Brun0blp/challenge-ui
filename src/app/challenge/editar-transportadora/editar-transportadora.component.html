@@ -102,9 +102,8 @@
                         <mat-form-field>
                             <mat-label>Estado</mat-label>
                             <mat-select formControlName="estado">
-                                <mat-option value="PE">Pernambuco</mat-option>
-                                <mat-option value="SP">São Paulo</mat-option>
-                                <mat-option value="PB">Paraíba</mat-option>
+                                <mat-option></mat-option>
+                                <mat-option *ngFor="let uf of listaDeUfs" value="{{uf}}">{{ uf | estadoPipe }}</mat-option>
                             </mat-select>
                         </mat-form-field>
 

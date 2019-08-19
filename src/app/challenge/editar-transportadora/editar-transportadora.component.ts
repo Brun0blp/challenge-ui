@@ -101,11 +101,12 @@ export class EditarTransportadoraComponent implements OnInit {
       nome,
       empresa,
       email,
-      telefone: telefoneCodigo + telefoneNumero,
-      celular: celularCodigo + celularNumero,
-      whatsApp: whatsAppCodigo + whatsAppNumero,
+      telefone: telefoneCodigo && telefoneNumero ? telefoneCodigo + telefoneNumero : null,
+      celular: celularCodigo && celularNumero ? celularCodigo + celularNumero : null,
+      whatsApp: whatsAppCodigo && whatsAppNumero ? whatsAppCodigo + whatsAppNumero : null,
       modal,
       endereco: new Endereco({
+        id: this.transportadora.endereco.id,
         cep,
         estado,
         cidade,
@@ -126,7 +127,7 @@ export class EditarTransportadoraComponent implements OnInit {
     this._service.iniciarExclusao(this.transportadora)
       .pipe(filter(res => !!res))
       .subscribe({
-        next: () => this._router.navigate(['../..']),
+        next: () => this._router.navigate(['..', 'challenge']),
       });
   }
 

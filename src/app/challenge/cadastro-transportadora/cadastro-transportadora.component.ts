@@ -50,9 +50,9 @@ export class CadastroTransportadoraComponent {
       nome,
       empresa,
       email,
-      telefone: telefoneCodigo + telefoneNumero,
-      celular: celularCodigo + celularNumero,
-      whatsApp: whatsAppCodigo + whatsAppNumero,
+      telefone: telefoneCodigo && telefoneNumero ? telefoneCodigo + telefoneNumero : null,
+      celular: celularCodigo && celularNumero ? celularCodigo + celularNumero : null,
+      whatsApp: whatsAppCodigo && whatsAppNumero ? whatsAppCodigo + whatsAppNumero : null,
       modal,
       endereco: new Endereco({
         cep,

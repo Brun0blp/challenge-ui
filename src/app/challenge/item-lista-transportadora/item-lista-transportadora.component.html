@@ -8,19 +8,20 @@
                 <div class="imagem"></div>
             </div>
     
-            <div fxFlex fxLayout="column">
+            <div fxFlex fxLayout="column" fxLayoutGap="4px">
                 <a [routerLink]="['e', transportadora.id]">
-                    <span>{{ transportadora?.nome }} - {{ transportadora?.empresa }}</span>
+                    <span>{{ transportadora?.nome }} - {{ transportadora?.empresa }} ({{ transportadora?.modal }})</span>
                 </a>
-                <p>{{ transportadora?.modal }}</p>
+                <p>{{transportadora?.endereco?.rua }} {{transportadora?.endereco?.numero }}, {{transportadora?.endereco?.bairro }}</p>
+                <p>{{transportadora?.endereco?.cidade }} - {{transportadora?.endereco?.estado }}</p>
             </div>
     
-            <div fxFlex fxLayout="column">
+            <div fxFlex fxLayout="column" fxLayoutGap="4px">
                 <p>{{ formatarFones(transportadora?.telefone) }} <span *ngIf="transportadora?.celular && transportadora?.celular != '0'">- {{ formatarFones(transportadora?.celular) }}</span></p>
                 <p>{{ transportadora?.email }}</p>
             </div>
             
-            <div fxFlex fxLayout="column">
+            <div fxFlex fxLayout="column" fxLayoutGap="4px">
                 <p *ngIf="transportadora?.whatsApp && transportadora?.whatsApp !='0'">Fale agora: {{ formatarFones(transportadora?.whatsApp) }}</p>
             </div>
     

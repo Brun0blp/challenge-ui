@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TransportadoraRepository } from './transportadora.repository';
+import { TransportadoraRepository, FiltrosDaListaDeTransportadoras } from './transportadora.repository';
 import { Observable } from 'rxjs';
 import { Transportadora } from './model/transportadora';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,8 +10,8 @@ export class TransportadoraService {
 
   constructor(private _respository: TransportadoraRepository, private _dialog: MatDialog) { }
 
-  listar(): Observable<Transportadora[]> {
-    return this._respository.listarTransportadoras();
+  listar(filtros: FiltrosDaListaDeTransportadoras): Observable<Transportadora[]> {
+    return this._respository.listarTransportadoras(filtros);
   }
 
   detalhar(id: number): Observable<Transportadora> {

@@ -14,17 +14,71 @@
         </mat-toolbar-row>
     </mat-toolbar>
 
-    <section fxFlex fxLayout="column">
-        <div fxFLex="10">
-            <p>Filtro aqui</p>
-        </div>
+    <mat-card>
+        <mat-card-content>
+
+            <form [formGroup]="filtros" fxLayout="row" fxLayoutGap="8px">
+
+                <div fxFlex="15">
+    
+                    <mat-form-field>
+                        <mat-label>Pesquisar por nome</mat-label>
+                        <input matInput type="text" formControlName="q">
+                    </mat-form-field>
+
+                </div>
+
+                <div fxFlex="15">
+    
+                    <mat-form-field>
+                        <mat-label>Cidade</mat-label>
+                        <input matInput type="text" formControlName="cidade">
+                    </mat-form-field>
+
+                </div>
+
+                <div fxFlex="15">
+    
+                    <mat-form-field>
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="estado">
+                            <mat-option></mat-option>
+                            <mat-option value="PE">Pernambuco</mat-option>
+                            <mat-option value="SP">São Paulo</mat-option>
+                            <mat-option value="PB">Paraíba</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxFlex="15">
+    
+                    <mat-form-field>
+                        <mat-label>Modal</mat-label>
+                        <mat-select formControlName="modal">
+                            <mat-option></mat-option>
+                            <mat-option value="AEREO">Aéreo</mat-option>
+                            <mat-option value="AQUAVIARIO">Aquaviário</mat-option>
+                            <mat-option value="RODOVIARIO">Rodoviário</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+
+    <section fxFlex>
 
         <div fxFlex>
-            <h2 *ngIf="!listaDeTransportadoras.length">Nenhum registro</h2>
+            <h3 *ngIf="!listaDeTransportadoras?.length">Nenhum registro encontrado...</h3>
             <ng-container *ngFor="let transportadora of listaDeTransportadoras">
                 <app-item-lista-transportadora [transportadora]="transportadora"></app-item-lista-transportadora>
             </ng-container>
         </div>
+
     </section>
 
 </section>

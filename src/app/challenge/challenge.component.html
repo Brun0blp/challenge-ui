@@ -20,6 +20,7 @@
         </div>
 
         <div fxFlex>
+            <h2 *ngIf="!listaDeTransportadoras.length">Nenhum registro</h2>
             <ng-container *ngFor="let transportadora of listaDeTransportadoras">
                 <app-item-lista-transportadora [transportadora]="transportadora"></app-item-lista-transportadora>
             </ng-container>

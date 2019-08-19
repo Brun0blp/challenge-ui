@@ -8,6 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChallengeRoutingModule } from './challenge.routing';
 import { ChallengeComponent } from './challenge.component';
@@ -17,6 +18,9 @@ import { TransportadoraRepository } from './shared/transportadora.repository';
 import { ItemListaTransportadoraComponent } from './item-lista-transportadora/item-lista-transportadora.component';
 import { RouterModule } from '@angular/router';
 import { CadastroTransportadoraComponent } from './cadastro-transportadora/cadastro-transportadora.component';
+import { EditarTransportadoraComponent } from './editar-transportadora/editar-transportadora.component';
+import { DialogExclusaoModule } from './shared/dialog-exclusao/dialog-exclusao.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -25,6 +29,7 @@ import { CadastroTransportadoraComponent } from './cadastro-transportadora/cadas
     HttpClientModule,
     RouterModule,
     ChallengeRoutingModule,
+    DialogExclusaoModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     MatToolbarModule,
@@ -34,8 +39,10 @@ import { CadastroTransportadoraComponent } from './cadastro-transportadora/cadas
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
-  declarations: [ChallengeComponent, ItemListaTransportadoraComponent, CadastroTransportadoraComponent],
+  declarations: [ChallengeComponent, ItemListaTransportadoraComponent, CadastroTransportadoraComponent, EditarTransportadoraComponent],
   providers: [
     TransportadoraService,
     TransportadoraRepository,

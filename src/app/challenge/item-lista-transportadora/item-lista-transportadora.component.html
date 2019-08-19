@@ -5,21 +5,23 @@
         <mat-card-content fxLayout="row">
     
             <div fxFlex="8" fxLayout="column" fxFlexAlign="center center">
-                imagem aqui 
+                <div class="imagem"></div>
             </div>
     
             <div fxFlex fxLayout="column">
-                <p>{{transportadora?.nome }} - {{ transportadora?.modal }}</p>
-                <p>25.733.638/0001-62</p>
+                <a [routerLink]="['e', transportadora.id]">
+                    <span>{{ transportadora?.nome }} - {{ transportadora?.empresa }}</span>
+                </a>
+                <p>{{ transportadora?.modal }}</p>
             </div>
     
             <div fxFlex fxLayout="column">
-                <p>{{ formatarFones(transportadora?.telefone) }} <span *ngIf="transportadora?.celular">- {{ formatarFones(transportadora?.celular) }}</span></p>
+                <p>{{ formatarFones(transportadora?.telefone) }} <span *ngIf="transportadora?.celular && transportadora?.celular != '0'">- {{ formatarFones(transportadora?.celular) }}</span></p>
                 <p>{{ transportadora?.email }}</p>
             </div>
             
             <div fxFlex fxLayout="column">
-                <p *ngIf="transportadora?.whatsApp">Fale agora: {{ formatarFones(transportadora?.whatsApp) }}</p>
+                <p *ngIf="transportadora?.whatsApp && transportadora?.whatsApp !='0'">Fale agora: {{ formatarFones(transportadora?.whatsApp) }}</p>
             </div>
     
         </mat-card-content>

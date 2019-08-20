@@ -1,27 +1,35 @@
-# ChallengeUi
+# Challenge
+> CRUD de transportadoras.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
+Esse é o resultado do desafio proposto pela HiveCloud/Praxio. A aplicação é responsável por armazenar informações básicas sobre uma determinada transportadora.
+Nela podemos listar todas as transportadoras salvas e filtrá-las, adicionar novas transportadoras, editar e excluir as informações da transportadora.
+O projeto foi divido em dois sub-projetos, front-end e back-end, onde este é o back-end. Para consumo correto da aplicação, é obrigatorio possuir os dois sub-projetos na máquina. Inicializar primeiro o back-end e posteriormente o front-end.
 
-## Development server
+## Pré-requesitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* NodeJs
+* Angular Cli
 
-## Code scaffolding
+## Instalação
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Aṕos clonar o projeto, é necessário mudar a branch alvo:
 
-## Build
+```sh
+git checkout develop
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Instalar as dependências executando:
 
-## Running unit tests
+```sh
+npm i
+```
+Iniciar o projeto do back-end e em seguida executar:
+```sh
+npm run star
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Acessar o endereco: [http://localhost:4200/challenge](http://localhost:4200/challenge)
 
-## Running end-to-end tests
+## Meta
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Bruno Barbosa Leite Pimentel – bruno.bblp@gmail.com

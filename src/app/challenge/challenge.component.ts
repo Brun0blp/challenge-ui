@@ -4,7 +4,8 @@ import { Transportadora } from './shared/model/transportadora';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { listaUfs } from './shared/model/tipo-uf.enum';
+import { listaUfs as todasUFs} from './shared/model/tipo-uf.enum';
+import { ContadorUf } from './shared/model/contador-uf';
 
 @Component({
   selector: 'app-challenge',
@@ -17,7 +18,9 @@ export class ChallengeComponent implements OnInit {
 
   filtros: FormGroup;
 
-  listaDeUfs = listaUfs;
+  listaUfsCadastradas: ContadorUf[];
+
+  listaDeUfs = todasUFs;
 
   constructor(
     private _fb: FormBuilder,
@@ -34,7 +37,12 @@ export class ChallengeComponent implements OnInit {
     }
 
   ngOnInit() {
-    this._service.listar(this.filtros.value)
+
+    this._service.contarUfs()
+      .pipe(switchMap(lista => {
+        this.listaUfsCadastradas = lista;
+        return this._service.listar(this.filtros.value);
+      }))
       .subscribe({
         next: lista => this.listaDeTransportadoras = lista,
         error: err =>  this._snackBar.open('Erro ao obter lista de transportadoras', '', { duration: 4000 })
@@ -47,6 +55,14 @@ export class ChallengeComponent implements OnInit {
         next: lista => this.listaDeTransportadoras = lista,
         error: err =>  this._snackBar.open('Erro ao obter lista de transportadoras', '', { duration: 4000 })
       });
+  }
+
+  showCount(): boolean {
+    if (this.filtros) {
+      const { q, cidade, modal } = this.filtros.value;
+      return !(q || cidade || modal);
+    }
+    return true;
   }
 
 }

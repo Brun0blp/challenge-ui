@@ -4,7 +4,7 @@
         <mat-toolbar-row>
 
             <p>Transportadoras |</p>
-            
+
             <div fxFlex></div>
 
             <button mat-raised-button [routerLink]="['c']">
@@ -20,7 +20,7 @@
             <form [formGroup]="filtros" fxLayout="row" fxLayoutGap="8px">
 
                 <div fxFlex="15">
-    
+
                     <mat-form-field>
                         <mat-label>Pesquisar por nome</mat-label>
                         <input matInput type="text" formControlName="q">
@@ -29,7 +29,7 @@
                 </div>
 
                 <div fxFlex="15">
-    
+
                     <mat-form-field>
                         <mat-label>Cidade</mat-label>
                         <input matInput type="text" formControlName="cidade">
@@ -38,19 +38,23 @@
                 </div>
 
                 <div fxFlex="15">
-    
+
                     <mat-form-field>
                         <mat-label>Estado</mat-label>
-                        <mat-select formControlName="estado">
+                        <mat-select *ngIf="showCount()" formControlName="estado">
                             <mat-option></mat-option>
-                            <mat-option *ngFor="let uf of listaDeUfs" value="{{uf}}">{{ uf | estadoPipe }}</mat-option>
+                            <mat-option *ngFor="let item of listaUfsCadastradas" value="{{ item.estado }}">{{ item.estado | estadoPipe }} ({{ item.quantidade }})</mat-option>
+                        </mat-select>
+                        <mat-select *ngIf="!showCount()" formControlName="estado">
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let uf of listaDeUfs" value="{{ uf }}">{{ uf | estadoPipe }}</mat-option>
                         </mat-select>
                     </mat-form-field>
 
                 </div>
 
                 <div fxFlex="15">
-    
+
                     <mat-form-field>
                         <mat-label>Modal</mat-label>
                         <mat-select formControlName="modal">

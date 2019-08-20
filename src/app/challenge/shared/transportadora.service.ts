@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Transportadora } from './model/transportadora';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogExclusaoComponent } from './dialog-exclusao/dialog-exclusao.component';
+import { ContadorUf } from './model/contador-uf';
 
 @Injectable()
 export class TransportadoraService {
@@ -12,6 +13,10 @@ export class TransportadoraService {
 
   listar(filtros: FiltrosDaListaDeTransportadoras): Observable<Transportadora[]> {
     return this._respository.listarTransportadoras(filtros);
+  }
+
+  contarUfs(): Observable<ContadorUf[]> {
+    return this._respository.contarUfs();
   }
 
   detalhar(id: number): Observable<Transportadora> {

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Transportadora } from './model/transportadora';
 import { TipoUf } from './model/tipo-uf.enum';
 import { TipoModal } from './model/tipo-modal.enum';
+import { ContadorUf } from './model/contador-uf';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -29,6 +30,11 @@ export class TransportadoraRepository {
 
     listarTransportadoras(filtros: FiltrosDaListaDeTransportadoras): Observable<Transportadora[]> {
         return this._http.get<Transportadora[]>(apiUri, { params: {...this._setFiltros(filtros)} });
+    }
+
+    contarUfs(): Observable<ContadorUf[]> {
+      const uri = apiUri + '/ufs';
+      return this._http.get<ContadorUf[]>(uri);
     }
 
     detalhar(transportadoraId: number): Observable<Transportadora> {
